@@ -1,8 +1,8 @@
-# Agent OS Markdown
+# NodeAgentSpec
 
 > A portable markdown spec pack for building durable, inspectable AI agent systems.
 
-Agent OS Markdown is a repo of plain `.md` operating documents for teams building agents that do real work: goals, workers, memory, tools, permissions, traces, artifacts, and human steering.
+NodeAgentSpec is a repo of plain `.md` operating documents for teams building agents that do real work: goals, workers, memory, tools, permissions, traces, artifacts, and human steering.
 
 The core idea is simple:
 
