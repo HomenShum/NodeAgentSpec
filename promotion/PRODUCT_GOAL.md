@@ -60,7 +60,7 @@ Baseline measured 2026-08-13 against commit `5f17b04` on `main`.
 | 1 | Journeys succeed end-to-end in a real browser | UNVERIFIED | J1 and J2 observed working in the rendered page (README at 1280px and 375px; File Map 20 rows; `soul.md` navigated, `h1` = "Soul", 2,639 chars rendered). J3–J5 are offline authoring workflows with no observable completion state, so "all journeys" was never observed. |
 | 2 | No critical or major usability defect open | FAIL | D1 open: README "How To Use" step 7 says "Run the tests from `evals.md` and `readiness.md`", and neither file contains a runnable test. Repro in PROMOTION_LOG.md. |
 | 3 | Mobile and desktop both intentional | UNVERIFIED | Repo authors no layout of its own — every pixel is GitHub.com's chrome. Content reflowed cleanly at both widths, but clean is not evidence of intent, and auditing GitHub's design would not be auditing this product. |
-| 4 | No horizontal overflow at supported widths | PASS | Measured on this repo's own authored content in the rendered page. 375×812: `documentElement.scrollWidth` 375 == `clientWidth` 375, zero elements extending past the viewport, File Map table 309px with no internal scroll, code blocks no scroll. 1280px: `scrollWidth` 1265 == `clientWidth` 1265, table 567px, code blocks 823px/234px, none overflowing. |
+| 4 | No horizontal overflow at supported widths | UNVERIFIED | Measured 0 overflow at 375×812 and 1280px, probe not retained. The numbers were real — 375×812: `documentElement.scrollWidth` 375 == `clientWidth` 375, zero elements past the viewport, File Map table 309px, code blocks no scroll; 1280px: `scrollWidth` 1265 == `clientWidth` 1265, table 567px, code blocks 823px/234px — but they exist only as prose here. No output is committed under `promotion/evidence/` and no producer that re-runs the measurement is committed, so nobody cloning this repo can re-measure it. Prose numbers are not an artifact; the row does not qualify as PASS. This repo is documentation-only and owns no test runner to host such a probe, so retaining one is a product decision, not a scorecard fix. |
 | 5 | Loading/empty/success/error/agent-running designed | UNVERIFIED | Product is static documents; it has no runtime and therefore no such states to design. Nothing was observed either way. |
 | 6 | Keyboard and basic accessibility pass | UNVERIFIED | No accessibility audit was run this wave. |
 | 7 | Web Interface Guidelines: no major unresolved | UNVERIFIED | Review not run this wave. |
@@ -70,4 +70,8 @@ Baseline measured 2026-08-13 against commit `5f17b04` on `main`.
 | 11 | Tests and build green | UNVERIFIED | Nothing to run, so nothing was observed green. `npm ci` exit 1 (no lockfile), `npm test` exit 127 (no package.json), `npm run build` exit 127 (no package.json), `pytest -q` exit 5 (no tests collected). |
 | 12 | Verified in the rendered app, not inferred from code | UNVERIFIED | This wave is a baseline and made no product improvements, so there is nothing whose verification could be checked. |
 
-**Status: NOT PROMOTED** — 1/12 PASS.
+**Status: NOT PROMOTED** — 0/12 PASS, 1 FAIL, 11 UNVERIFIED.
+
+Condition 4 was published as PASS on 2026-08-13 and corrected to UNVERIFIED the
+same day; the original claim and the reason it did not qualify are recorded under
+"Correction — 2026-08-13" in [PROMOTION_LOG.md](PROMOTION_LOG.md).

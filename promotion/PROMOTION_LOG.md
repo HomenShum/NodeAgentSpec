@@ -60,8 +60,9 @@ rather than inherited if that happens.
   200 and 7× 429, where the 429s were caused by my own rapid-fire request loop
   and are not a repo defect.
 
-- **Scorecard at baseline:** see [PRODUCT_GOAL.md](PRODUCT_GOAL.md) — 1/12 PASS,
-  1 FAIL, 10 UNVERIFIED.
+- **Scorecard at baseline:** see [PRODUCT_GOAL.md](PRODUCT_GOAL.md) — published as
+  1/12 PASS, 1 FAIL, 10 UNVERIFIED; corrected the same day to **0/12 PASS, 1 FAIL,
+  11 UNVERIFIED** (see "Correction — 2026-08-13" below).
 
 ### Not a defect — recorded so the next reader does not re-raise it
 
@@ -78,6 +79,51 @@ viewscreen failure that affects mermaid rendering generally, not this repo's
 markdown.** Had the control not been run, this baseline would have shipped a
 false defect.
 
+## Correction — 2026-08-13
+
+The baseline above was published claiming **1/12 PASS**. An adversarial re-run
+against GitHub could confirm **0** of that 1. The scorecard now reads **0/12
+PASS**. Nothing about the measurement was fabricated; the evidence backing it was
+not admissible.
+
+- **Downgraded: condition 4** (no horizontal overflow at supported widths),
+  **PASS → UNVERIFIED**. Reason: *measured 0 overflow at 375×812 and 1280px,
+  probe not retained.*
+- **Why it does not qualify.** The GATE was amended today with "Where evidence
+  lives, and what counts as an artifact": a row is PASS only when **both** halves
+  hold — the output is committed at a path the row names, **and** the producer
+  (script, test, or npm target) is committed and re-runnable by someone who just
+  cloned the repo. Condition 4's evidence was neither. It was a set of DOM numbers
+  read out of a live browser pane and typed into the table as prose. `git ls-files`
+  returns 31 markdown files and nothing else: no screenshot, no receipt, no
+  `promotion/evidence/` directory, no capture script. A reader cannot re-measure
+  it, which is the whole point of an evidence path.
+- **What was not done, deliberately.** No new probe was written to rescue the row.
+  Writing a throwaway script after the fact, running it once, and pointing the row
+  at its output would satisfy the letter of the rule while defeating it — the
+  producer has to be something the repo keeps, not something conjured to make a
+  cell green. This repo is documentation-only and owns no test runner; committing
+  a browser-measurement harness into a markdown pack would be new product scope,
+  which a scorecard-truth correction is not allowed to introduce. UNVERIFIED with
+  the reason stated is the honest end state until a wave that legitimately adds
+  tooling here.
+- **Independently corroborated.** The judge could not re-measure condition 4
+  either — the browser tab cap was reached, the same contention recorded as
+  blocker #3 in this baseline. That is a second reason the row cannot stand on a
+  live-pane reading: the surface is not reliably available to the next auditor.
+- **Not changed.** Conditions 1–3 and 5–12 keep their existing statuses and
+  reasons; all were already UNVERIFIED or FAIL and none rested on an unretained
+  artifact claim. Condition 9 stays UNVERIFIED rather than becoming FAIL: the only
+  failed requests observed were 7× HTTP 429 from my own rapid link-check loop,
+  which is explained and is not a defect of this repo. The five journeys in
+  PRODUCT_JOURNEYS.md are unchanged — they were confirmed at line-level precision,
+  including the mermaid control run that stopped a transient GitHub viewscreen
+  failure from being written up as a defect of this repo.
+- **One fact corrected in the ledger below.** D1 described `readiness.md` as "a
+  37-line human checklist". The file is 65 lines containing 37 checklist bullets
+  across seven `Readiness` sections. An agent resuming cold would clone, count 65,
+  and distrust the whole ledger over a number that was merely imprecise.
+
 ## Defect ledger
 
 Open defects, most-impactful first. A defect is only listed once it has a
@@ -85,7 +131,8 @@ reproduction; a hunch is not a defect.
 
 | # | Severity | Journey | Reproduction | Status |
 |---|----------|---------|--------------|--------|
-| D1 | Major | J3, J5 | The last step of the repo's own quickstart cannot be performed. `README.md:91` step 7 reads "Run the tests from `evals.md` and `readiness.md`". Neither file contains a runnable test: `evals.md` is 131 lines of category prose naming what to test ("off-by-one", "stale done") with no command, and `readiness.md` is a 37-line human checklist. Repro: clone the repo, open `README.md`, follow "How To Use" steps 1–7; at step 7 there is nothing to execute — `npm test` exits 127 (no `package.json`), `pytest -q` exits 5 (no tests collected). A first-time adopter finishes the quickstart unable to tell whether they did it right, which is the exact outcome `CONTRIBUTING.md:26` requires changes to avoid ("The change has an observable verification path"). | OPEN |
+| D1 | Major | J3, J5 | The last step of the repo's own quickstart cannot be performed. `README.md:91` step 7 reads "Run the tests from `evals.md` and `readiness.md`". Neither file contains a runnable test: `evals.md` is 131 lines of category prose naming what to test ("off-by-one", "stale done") with no command, and `readiness.md` is a 65-line human checklist of 37 bullets across seven
+`Readiness` sections, none of them a command. Repro: clone the repo, open `README.md`, follow "How To Use" steps 1–7; at step 7 there is nothing to execute — `npm test` exits 127 (no `package.json`), `pytest -q` exits 5 (no tests collected). A first-time adopter finishes the quickstart unable to tell whether they did it right, which is the exact outcome `CONTRIBUTING.md:26` requires changes to avoid ("The change has an observable verification path"). | OPEN |
 | D2 | Minor | J1 | Stale product name survives the rename. `CONTRIBUTING.md:3` opens "Agent OS Markdown is intentionally plain markdown", while the repo, README title and description all say NodeAgentSpec (renamed in commit `5f17b04`, "Align public naming after repo rename"). Repro: open `https://github.com/HomenShum/NodeAgentSpec/blob/main/CONTRIBUTING.md` at any width; first body line names a different product. A stranger checking whether the project is maintained reads this as an abandoned rename. | OPEN |
 
 ## Iterations
