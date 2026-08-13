@@ -1,0 +1,93 @@
+# Promotion log — NodeAgentSpec
+
+Loop state lives here, in git, so any agent can resume cold. One entry per
+iteration. Append; never rewrite history, because the list of things that turned
+out to be wrong is more useful to the next reader than the current values alone.
+
+Iteration cap: **10** (default). On reaching the cap without a gate pass, stop
+and leave the remaining defect ledger below — a documented stop is a valid
+outcome; a silent one is not.
+
+## Entry shape
+
+```
+### Iteration N — YYYY-MM-DD
+- Journey exercised: J<k> <name>
+- Observed: <the defect, with its reproduction — inputs, width, state>
+- Fixed: <the change, using existing components; file paths>
+- Re-proved: <evidence path showing the defect gone in the rendered app>
+- Tests: <command and result>
+- Conditions newly PASS: <numbers, or "none">
+```
+
+---
+
+## Baseline — 2026-08-13
+
+**This repo is marked DEFERRED pending marketplace consolidation with
+BetterPRHandoff. This baseline is provisional.** It is a truthful reading of
+commit `5f17b04` as it stands today, but the repo's scope may change or merge
+before any promotion loop runs against it, and these numbers should be re-measured
+rather than inherited if that happens.
+
+- **App started:** no — there is no app to start, and this is a property of the
+  product rather than a blocker. The repo is 27 markdown files and 2,630 lines
+  with zero code: no package manifest, no lockfile, no test runner, no build
+  step, no server, no demo page. Commands attempted, all from a fresh
+  `git clone --depth 50`:
+
+  | Command | Exit | Result |
+  |---|---|---|
+  | `git clone --depth 50 …/NodeAgentSpec.git` | 0 | 27 files, HEAD `5f17b04` on `main` |
+  | `npm ci` | 1 | `EUSAGE` — no `package-lock.json` |
+  | `npm test` | 127 | `ENOENT` — no `package.json` |
+  | `npm run build` | 127 | `ENOENT` — no `package.json` |
+  | `pytest -q` | 5 | no tests collected |
+  | `ls templates` | 0 | 4 template files present |
+
+- **Surface actually driven:** the GitHub-rendered view of this repo, at
+  1280×900 and 375×812, using the in-app browser. This is the only surface a
+  stranger meets.
+
+- **Journeys drivable: 2 of 5.** J1 (evaluate from the README) and J2 (follow the
+  File Map into a document) were driven end-to-end and observed in the rendered
+  page. J3, J4 and J5 are offline authoring workflows whose outcome lands in the
+  reader's own repo; they have no completion state this repo can display, and J3
+  additionally hits defect D1 at its final step.
+
+- **Link integrity:** 0 broken relative links across all 27 files. All 20 File
+  Map targets exist on disk; a live fetch of the 20 rendered hrefs returned 13×
+  200 and 7× 429, where the 429s were caused by my own rapid-fire request loop
+  and are not a repo defect.
+
+- **Scorecard at baseline:** see [PRODUCT_GOAL.md](PRODUCT_GOAL.md) — 1/12 PASS,
+  1 FAIL, 10 UNVERIFIED.
+
+### Not a defect — recorded so the next reader does not re-raise it
+
+On the first load of `README.md`, the "The Stack" mermaid diagram failed to
+render: its `.render-container` carried `is-render-failed`, the
+`viewscreen.githubusercontent.com/markdown/mermaid` iframe had height 0, and the
+raw ` flowchart TB ` source was visible as a 268px-tall code block. This looked
+like a real defect. It was checked against a control before being written up:
+`github.com/mermaid-js/mermaid` loaded in the same browser pane rendered 9 of its
+10 diagrams and failed 1 the same way. On reload, NodeAgentSpec's diagram
+rendered correctly twice in a row (`is-render-ready`, iframe 450px at 375px wide
+and 180px at 1280px wide, raw source hidden). **Conclusion: a transient GitHub
+viewscreen failure that affects mermaid rendering generally, not this repo's
+markdown.** Had the control not been run, this baseline would have shipped a
+false defect.
+
+## Defect ledger
+
+Open defects, most-impactful first. A defect is only listed once it has a
+reproduction; a hunch is not a defect.
+
+| # | Severity | Journey | Reproduction | Status |
+|---|----------|---------|--------------|--------|
+| D1 | Major | J3, J5 | The last step of the repo's own quickstart cannot be performed. `README.md:91` step 7 reads "Run the tests from `evals.md` and `readiness.md`". Neither file contains a runnable test: `evals.md` is 131 lines of category prose naming what to test ("off-by-one", "stale done") with no command, and `readiness.md` is a 37-line human checklist. Repro: clone the repo, open `README.md`, follow "How To Use" steps 1–7; at step 7 there is nothing to execute — `npm test` exits 127 (no `package.json`), `pytest -q` exits 5 (no tests collected). A first-time adopter finishes the quickstart unable to tell whether they did it right, which is the exact outcome `CONTRIBUTING.md:26` requires changes to avoid ("The change has an observable verification path"). | OPEN |
+| D2 | Minor | J1 | Stale product name survives the rename. `CONTRIBUTING.md:3` opens "Agent OS Markdown is intentionally plain markdown", while the repo, README title and description all say NodeAgentSpec (renamed in commit `5f17b04`, "Align public naming after repo rename"). Repro: open `https://github.com/HomenShum/NodeAgentSpec/blob/main/CONTRIBUTING.md` at any width; first body line names a different product. A stranger checking whether the project is maintained reads this as an abandoned rename. | OPEN |
+
+## Iterations
+
+_none yet_
