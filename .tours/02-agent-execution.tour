@@ -6,60 +6,70 @@
     {
       "file": "loop.md",
       "line": 34,
+      "pattern": "### 2\\. Interpret",
       "title": "Step 1 - words become a typed intent",
       "description": "Everything starts here. A human said something; before any work is scheduled it is classified into one of ten kinds - new goal, parallel goal, replacement, constraint, correction, approval, question, cancellation, retry, status request.\n\nThe requirement is that interpretation produces typed intent, 'not only prose'. An unclassified utterance is how steering gets lost."
     },
     {
       "file": "harness.md",
       "line": 7,
+      "pattern": "## Harness Responsibilities",
       "title": "Step 2 - the boundary the whole pack is built on",
       "description": "The harness validates intents, commits transitions, schedules workers, enforces permissions and budgets, guards stale completions, and writes traces.\n\nThe model does none of that. It proposes. The file's closing rule is 'The harness owns truth. The model owns proposals.' If you keep one sentence from this repository, keep that one."
     },
     {
       "file": "harness.md",
       "line": 92,
+      "pattern": "type AgentOsPolicy = \\{",
       "title": "Step 3 - policy is state, not a prompt instruction",
       "description": "Four fields. Budget used, budget max, and two permission booleans. The significance is the type, not the content: permission is data the harness reads before acting, so no amount of persuasion in a prompt can grant it.\n\nWorkerRun used to be defined here too, in a shortened form missing the startedAt field that workers.md declares mandatory. It was removed in the human-readiness wave; the type is defined once, in workers.md."
     },
     {
       "file": "context.md",
       "line": 55,
+      "pattern": "## Worker Context Packs",
       "title": "Step 4 - what a worker is handed",
       "description": "A scoped context pack, not the transcript. Goal, task, constraints, current policy, relevant artifacts and beliefs.\n\nThe list of what to leave out matters as much: full transcript, unrelated goals, tool credentials, speculative beliefs without source labels. Context flooding - too much transcript causing the model to miss the actual task - is a named failure."
     },
     {
       "file": "skills.md",
       "line": 7,
+      "pattern": "## Skill Contract",
       "title": "Step 5 - a capability is only schedulable if it has a contract",
       "description": "Eleven required fields, of which four carry the weight: what it may use, what it produces, how the harness verifies it worked, and what happens on cancel.\n\nThe file's closing rule: a capability that cannot state an input, permission, output and verifier is not ready to be scheduled."
     },
     {
       "file": "permissions.md",
       "line": 37,
+      "pattern": "### External Side Effect",
       "title": "Step 6 - the gate before the tool runs",
       "description": "Sending email, deploying, purchasing, opening a pull request, editing production data. Everything that changes the world outside the room sits behind an explicit approval that is recorded - who approved, what, where to, when, and when it expires.\n\nThe check happens before the tool call, not after. A tool that has already sent the email cannot be un-approved."
     },
     {
       "file": "harness.md",
       "line": 105,
+      "pattern": "## Commit Guard",
       "title": "Step 7 - the six checks before anything is committed",
       "description": "The most operationally important sequence in the pack. Before a worker writes its result: re-read the worker, confirm it is still running, confirm the attempt still matches, confirm the goal was not cancelled, confirm policy still allows the write, then commit atomically.\n\nThis is what stops a job the user cancelled two minutes ago from quietly overwriting the answer they are currently reading."
     },
     {
       "file": "artifact.md",
       "line": 24,
+      "pattern": "type Artifact = \\{",
       "title": "Step 8 - work becomes durable",
       "description": "The artifact is the proof that work happened, and the pack's position is that a transcript is not proof. Note sources on the type: if external facts were used, the artifact carries where they came from.\n\nartifact.md's closing rule: if work matters, it should leave an artifact."
     },
     {
       "file": "trace-schema.md",
       "line": 20,
+      "pattern": "## Standard Events",
       "title": "Step 9 - the receipt layer",
       "description": "The fixed event vocabulary, in the order a run produces it: input, intent, reducer, scheduling, policy, tool, artifact, verification.\n\nThis is the only file that defines events. delegation.md used to list nine of its own, two of which - goal_decomposed and artifact_merged - did not exist here at all, so a reader following delegation.md emitted events outside the standard vocabulary. Both are now defined here and delegation.md links across."
     },
     {
       "file": "visibility.md",
       "line": 7,
+      "pattern": "## Required Surfaces",
       "title": "Step 10 - what the user is owed on screen",
       "description": "Five surfaces: goals, workers, policy, artifacts, traces. This is where the nine questions from the README become an interface requirement rather than a slogan.\n\nvisibility.md's closing rule: if users cannot inspect the system, they cannot steer it. Continue with tour 03 for what happens when this goes wrong."
     }

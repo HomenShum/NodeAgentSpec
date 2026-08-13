@@ -55,6 +55,11 @@ If the system cannot answer those questions, it is not yet an agent operating sy
 
 ## File Map
 
+**Nothing in this repo runs.** Every row below is a document you copy into your
+own repository and edit — not a source tree. New here?
+[docs/START_HERE.md](docs/START_HERE.md) walks all twenty in the order your
+system executes them, rather than the order this table lists them.
+
 | File | Purpose |
 |---|---|
 | [soul.md](soul.md) | Operating constitution for durable agency |
@@ -82,10 +87,7 @@ Templates live in [templates/](templates/).
 
 ## How To Use
 
-New here? [docs/START_HERE.md](docs/START_HERE.md) walks all twenty documents in
-the order your system executes them, rather than the order they are listed in.
-
-Nothing in this repo runs. These steps are authoring work in *your* repo:
+These steps are authoring work in *your* repo:
 
 1. Copy the files into your repo.
 2. Edit `soul.md` to match your product boundary.

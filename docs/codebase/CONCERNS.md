@@ -1,7 +1,9 @@
 # Concerns
 
 Everything known to be wrong or unfinished, with the reason it was left. Ordered
-by what would bite a new reader soonest.
+by what would bite a new reader soonest. A concern that gets fixed is marked
+CLOSED here rather than deleted, because the reason it was deferred is usually
+the more useful half.
 
 ## C1 — Adoption still has no success signal
 
@@ -68,7 +70,7 @@ depends on. Low value, real risk.
 `promotion/PRODUCT_GOAL.md` describes the repository as "27 markdown files and
 zero lines of code" and scores it 0/12 PASS. That was true of commit `5f17b04`
 and is explicitly scoped to it. After this wave the repository has 44 files, one
-of which is a 71-line Node script.
+of which is a 167-line Node script.
 
 **Why left:** `PROMOTION_LOG.md` is append-only by its own rule — "never rewrite
 history, because the list of things that turned out to be wrong is more useful to
@@ -87,12 +89,17 @@ reintroduce a second `WorkerRun` and no one will be told.
 call, and the two commands are short enough to run by hand. If a third
 single-source defect appears, that is the trigger to automate.
 
-## C7 — The tour validator checks position, not meaning
+## C7 — CLOSED: the tour validator checked position, not meaning
 
-`.tours/validate.mjs` proves a tour step points at a line that exists. It cannot
-prove the line still says what the step claims. A section reworded in place keeps
-its line number and the tour silently becomes wrong.
+`.tours/validate.mjs` proved only that a tour step pointed at a line that
+existed, so a reworded or displaced section kept its line number and the tour
+became silently wrong. It was left on the argument that pinning steps to heading
+text was more machinery than three tours justify.
 
-**Why left:** checking meaning means pinning tour steps to heading text rather
-than line numbers, which is a better design and more machinery than the current
-three tours justify.
+That argument was wrong twice over. The machinery is one `pattern` field per step
+and one `RegExp.test` in the validator, and the defect was not hypothetical:
+moving one sentence in `README.md` displaced two steps onto a table row and a
+bullet, which the old check passed and the new one failed. Every step now carries
+the heading or type declaration it is about, `docs/START_HERE.md` stage citations
+are checked the same way, and both were negative-tested by pointing one at a
+wrong-but-existing line and watching the run exit 1.

@@ -6,42 +6,49 @@
     {
       "file": "README.md",
       "line": 1,
+      "pattern": "# NodeAgentSpec",
       "title": "The only page most readers see",
       "description": "Someone whose tool-using assistant keeps losing work has been sent this link. They have about ninety seconds. This line and the one under it have to tell them whether this is about their problem.\n\nThe claim underneath is the whole thesis: a capable agent is not a model loop, it is a stateful operating system around the model."
     },
     {
       "file": "README.md",
       "line": 40,
+      "pattern": "## The Contract",
       "title": "The nine questions - the actual pitch",
       "description": "This list does the selling. It is not a feature list; it is a diagnostic. A reader whose system cannot say what its active goal is, or which background jobs are stuck, has just diagnosed themselves.\n\nThe last line of the section is the hook: a system that cannot answer these is 'a transcript with tools'."
     },
     {
       "file": "README.md",
-      "line": 83,
+      "line": 88,
+      "pattern": "## How To Use",
       "title": "The primary user action, and it is a copy",
       "description": "This is the only action the repository offers. Everything after step 1 happens in the reader's repository, not this one.\n\nStep 7 is worth reading closely. It used to say 'Run the tests from evals.md and readiness.md', which readers took as a command to run here - there is no test runner, so the quickstart's last step could not be performed. That was defect D1 in promotion/PROMOTION_LOG.md. It now says whose system is under test."
     },
     {
       "file": "README.md",
-      "line": 113,
+      "line": 115,
+      "pattern": "## Minimal State Shape",
       "title": "The shape everything else elaborates",
       "description": "One type holding the whole system: policy, goals, tasks, workers, artifacts, world, traces. Every one of the twenty documents owns one field or one rule about a field.\n\nNote what follows the block - each field's type is now claimed by exactly one file. Before the human-readiness wave this block said 'world: { beliefs: Belief[] }' while world.md defined World with eight fields, and both claimed to own artifacts. A reader could not tell which to build."
     },
     {
       "file": "soul.md",
       "line": 7,
+      "pattern": "## Constitution",
       "title": "The constitution - first file to edit after copying",
       "description": "Fifteen rules that hold regardless of what a model proposes. Rule 1 ('Room state is the source of truth') and rule 14 ('A model's statement that work is done is not proof that work is done') are the two the rest of the pack keeps returning to.\n\nThe common adoption failure is copying this file and never editing it. A constitution that describes no particular product convinces nobody on the team."
     },
     {
       "file": "soul.md",
       "line": 40,
+      "pattern": "## Non-Negotiables",
       "title": "What the system must never do",
       "description": "Stated as prohibitions because prohibitions survive review better than aspirations. 'Hide active work from the user' and 'let stale workers commit after cancellation' are each expanded into a mechanism later - the visible surfaces in visibility.md and the Commit Guard in harness.md."
     },
     {
       "file": "templates/skill-template.md",
       "line": 1,
+      "pattern": "# Skill Template",
       "title": "The blank forms are the deliverable",
       "description": "Four templates: one capability, one background job, one test record, one shared workspace. This is the paperwork metaphor at its most literal - the headings are exactly the fields skills.md requires of a capability contract.\n\nAdoption is done when these are filled in with the reader's real capabilities. Continue with tour 02 for what the system does with them."
     }

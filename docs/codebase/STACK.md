@@ -13,7 +13,7 @@ else.
 
 | Thing | Value | How to check |
 |---|---|---|
-| Languages | Markdown only | `git ls-files \| grep -v '\.md$'` → one file, `.tours/validate.mjs` |
+| Languages | Markdown, plus one Node script | `git ls-files \| grep -v '\.md$'` → four files: three `.tours/*.tour` (JSON) and `.tours/validate.mjs` |
 | Package manifest | none | `ls package.json` → not found |
 | Lockfile | none | `ls package-lock.json` → not found |
 | Build step | none | nothing to build |
@@ -24,10 +24,12 @@ else.
 
 ## The one executable file
 
-`.tours/validate.mjs` — 71 lines of Node, no dependencies, no install.
-It checks that every step in the guided tours still points at a line that exists.
-It was added in the human-readiness wave because the tours are only useful if
-their line references are true, and a claim that they are true is not evidence.
+`.tours/validate.mjs` — 167 lines of Node, no dependencies, no install.
+It checks that every guided-tour step points at a line matching the step's
+`pattern`, and that every file and `## Symbol` cited by a stage of
+[../START_HERE.md](../START_HERE.md) exists. It was added in the human-readiness
+wave because the tours are only useful if their references are true, and a claim
+that they are true is not evidence.
 
 ```bash
 node .tours/validate.mjs

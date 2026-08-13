@@ -345,7 +345,8 @@ than paperwork. The repository's own automated check is narrow and covers only
 itself:
 
 ```bash
-node .tours/validate.mjs   # every guided-tour line reference still resolves
+node .tours/validate.mjs   # every tour step and every citation below points
+                           # at a line that says what it claims
 ```
 
 **Input** — the reader's running system.

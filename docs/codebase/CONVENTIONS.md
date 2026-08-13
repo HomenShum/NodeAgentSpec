@@ -75,5 +75,7 @@ grep -rn "^type YourType" --include=*.md .
 ## Cross-links
 
 Relative markdown links rather than absolute URLs, so they work on GitHub, in
-an editor, and in a reader's own repository after copying. All 38 resolve; check
-with the command in [TESTING.md](TESTING.md).
+an editor, and in a reader's own repository after copying. All of them resolve;
+count them and check them with the two commands in [TESTING.md](TESTING.md).
+The count is written down in one place only, because two copies of a number is
+how the old one went stale in both.

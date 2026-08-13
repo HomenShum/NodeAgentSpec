@@ -6,66 +6,77 @@
     {
       "file": "failure-modes.md",
       "line": 1,
+      "pattern": "# Failure Modes",
       "title": "One catalogue, nine named failures",
       "description": "The single place failures are named, each as symptom plus fix. Start every debugging session here - the odds are good the failure already has a name and a known mechanism against it.\n\nBefore the human-readiness wave four other documents restated entries from this list in their own words, so one bug wore up to four different names. They now keep only what is unique to their subject and link here."
     },
     {
       "file": "failure-modes.md",
       "line": 16,
+      "pattern": "## Lost Steer",
       "title": "Lost steer - the one users notice first",
       "description": "The user said something, it appears in the transcript, and nothing changed. This is the failure that makes people stop trusting an agent, because from outside it is indistinguishable from being ignored.\n\nThe fix is ordering: persist the raw input, classify it, commit the state transition, and only then schedule work."
     },
     {
       "file": "failure-modes.md",
       "line": 28,
+      "pattern": "## Fake Done",
       "title": "Fake done - the one that damages most",
       "description": "The model reports success and there is no artifact and no verifier behind it. Lost steer annoys a user; fake done makes them act on something that did not happen.\n\nThe fix is structural rather than a better prompt: require completion evidence, and ignore the model's 'done' unless the reducer agrees. soul.md rule 14 is the same rule stated as constitution."
     },
     {
       "file": "failure-modes.md",
       "line": 39,
+      "pattern": "## Stale Commit",
       "title": "Stale commit - the one that is hardest to reproduce",
       "description": "A worker the user cancelled or retargeted finishes late and commits anyway, overwriting current work with an answer to a question nobody is asking any more.\n\nIt is hard to catch because it only appears under real timing. The fix is the Commit Guard in harness.md - revalidate before committing, and use run tokens or attempt ids."
     },
     {
       "file": "interrupts.md",
       "line": 7,
+      "pattern": "## Interrupt Types",
       "title": "A human changing their mind is normal operation",
       "description": "Five kinds - additive, replacement, constraint, correction, status request - each with what the system should do about it.\n\nThe distinction that causes the most bugs is the last one. 'Hello?' and 'what are you doing?' are status requests, not new goals, and treating them as goals is how a room ends up working on something nobody asked for."
     },
     {
       "file": "interrupts.md",
       "line": 88,
+      "pattern": "## Interrupt Handling",
       "title": "The seven-step interrupt path",
       "description": "Persist the raw input, classify it, compare against current goals, apply the transition, then cancel or block or schedule, emit the trace, update visible state.\n\nStep 1 before step 2 is deliberate: store what the human said before interpreting it, so a classifier bug loses the interpretation rather than the input. The file's closing rule: human interruption is not exceptional, it is the control plane."
     },
     {
       "file": "workers.md",
       "line": 86,
+      "pattern": "## Blocked",
       "title": "Blocked is not failed",
       "description": "The most useful distinction in the lifecycle. Blocked means a precondition is missing - permission disabled, budget exhausted, dependency incomplete - and the user can do something about it.\n\nsoul.md rule 13 puts it plainly: prefer an honest blocked state over a fake success. A blocked worker with a visible reason is a working system telling the truth."
     },
     {
       "file": "workers.md",
       "line": 110,
+      "pattern": "## Retry",
       "title": "Retry never erases the failure",
       "description": "A retry is a new attempt linked to the original by retryOf, not a reset. The old failed or blocked record stays visible, policy is re-checked, and budget is consumed only when the new attempt is actually scheduled.\n\nThis is what makes a run auditable afterwards - the history of what was tried survives the fix."
     },
     {
       "file": "permissions.md",
       "line": 83,
+      "pattern": "## Permission Failure",
       "title": "What a missing permission must do",
       "description": "Do not run the tool. Mark the worker blocked. Show why. Offer retry once permission changes.\n\nAll four, in that order. Skipping the third leaves the user staring at a stalled system with no idea what to change."
     },
     {
       "file": "evals.md",
       "line": 72,
+      "pattern": "### Count To N",
       "title": "The test that catches most of it",
       "description": "'Count To N' looks trivial and is not. Counting to N with rotating turns catches off-by-one errors, stale done, overlapping turns and missing shared state in one exercise, because every one of those bugs shows up as a visibly wrong number.\n\nThe other two canonical tests are Interrupt Retarget and Parallel Goal."
     },
     {
       "file": "readiness.md",
       "line": 57,
+      "pattern": "## Honesty Readiness",
       "title": "The section that catches the rest",
       "description": "Honesty Readiness. No mock path behind the shipped claim, no hardcoded success presented as capability, failures still visible, and the final answer naming what was and was not verified.\n\nThis is the last thing to walk before telling anyone the system is real - and note that these tests run against the reader's system. This repository ships no test runner; its only self-check is 'node .tours/validate.mjs', which proves these tour steps still point where they claim."
     }

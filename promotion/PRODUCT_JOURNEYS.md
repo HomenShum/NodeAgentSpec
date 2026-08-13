@@ -32,11 +32,11 @@ and section it drives.
 - **Steps:**
   1. Open `https://github.com/HomenShum/NodeAgentSpec`.
   2. Read the one-line description and the "What This Gives You" list in `README.md`.
-  3. Look at the "The Stack" diagram — the ` ```mermaid ` block at `README.md:25-38`
+  3. Look at the "The Stack" diagram — the ` ```mermaid ` block under `README.md` "## The Stack"
      — which must appear as a drawn flowchart, not as raw `flowchart TB` source.
-  4. Read "The Contract" list at `README.md:40-54` (the nine questions an agent
+  4. Read the list under `README.md` "## The Contract" (the nine questions an agent
      system must be able to answer) and check whether their own system can answer them.
-  5. Scan the "File Map" table at `README.md:58-81` to see the scope on offer.
+  5. Scan the table under `README.md` "## File Map" to see the scope on offer.
 - **Done when:** They can state what the pack is and name several of the 20
   documents, and the Stack diagram rendered as a picture rather than as code text.
 - **Evidence:** Observed 2026-08-13 in the rendered page. Mermaid container
@@ -73,7 +73,7 @@ and section it drives.
   it into their own codebase and make it say something true about their product.
 - **Goal:** Have these documents in their repo, edited to their actual boundary,
   rather than a generic copy that nobody will trust.
-- **Steps:** The seven steps in "How To Use" at `README.md:83-91` — copy the files
+- **Steps:** The seven steps under `README.md` "## How To Use" — copy the files
   in, edit `soul.md` to their product boundary, define real capabilities in
   `skills.md`, implement the state objects from `harness.md` / `goals.md` /
   `workers.md`, add the events from `trace-schema.md`, build the UI from

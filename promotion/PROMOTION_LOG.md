@@ -191,3 +191,56 @@ re-measured and its 0/12 still stands against commit `5f17b04`.
   one plausibly affected — D1 is downgraded and D2 fixed — but a status change is
   a promotion-loop judgement made against the rendered product, not a
   documentation wave's to award itself.
+
+### Citation-guard wave — 2026-08-13
+
+Not a promotion iteration. A cold reader was given only this repository, ran it,
+and traced the nine stages of `docs/START_HERE.md`. Three of their findings were
+documentation drift and one was the check that should have caught it.
+
+- **Journey exercised:** none in a browser. J1's cited README regions were
+  touched this time: one paragraph is inserted under the "File Map" heading, so
+  the table moved down the file. No heading was added or removed and no table row
+  changed, so J1's recorded evidence (20 `tbody tr` rows, eight `h2` sections)
+  still holds. J1 and J3 now cite README *headings* instead of line ranges,
+  because it was those line ranges that my own one-paragraph insert falsified.
+
+- **Observed:** (1) `README.md` put "Nothing in this repo runs" thirty lines
+  BELOW a twenty-row File Map of lowercase single-word filenames, so a skimming
+  reader met what looks like a source tree before the sentence saying it is not
+  one. (2) `docs/codebase/STACK.md` claimed `git ls-files | grep -v '\.md$'`
+  returns "one file" — it returns four, three `.tours/*.tour` and
+  `.tours/validate.mjs` — and that was the first checkable claim in the table
+  whose whole purpose is "how to check this". (3) `docs/codebase/TESTING.md` and
+  `docs/codebase/CONVENTIONS.md` both said 38 relative links resolve; the
+  measured count is 62. (4) `.tours/validate.mjs` checked that a step's line
+  number was in range and nothing else — anchor stability, never anchor
+  correctness.
+
+- **Fixed:** the sentence and the `START_HERE.md` link moved above the File Map
+  in `README.md`; `STACK.md` states four files and re-measures the script at 167
+  lines; `TESTING.md` carries the link count once, next to a one-line command
+  that reproduces it, and `CONVENTIONS.md` stops keeping a second copy of the
+  number — two copies of a number is how both went stale. `.tours/validate.mjs`
+  now requires a `pattern` per tour step and asserts the CITED LINE matches it,
+  and checks every `**File:**` / `**Symbol:**` citation in `docs/START_HERE.md`
+  resolves to a real file and a real heading. C7 in `docs/codebase/CONCERNS.md`
+  is marked CLOSED with the argument that deferred it and why it was wrong.
+
+- **Re-proved:** the hardened guard immediately failed two steps of
+  `01-primary-user-flow.tour` that the README insert had displaced onto a table
+  row and a bullet — both lines still existed, so the old check passed them.
+  Re-anchored to 88 and 115 and re-run clean.
+
+- **Tests:** `node .tours/validate.mjs` → `OK: 28 tour steps across 3 tours
+  match their patterns; 39 START_HERE citations resolve.` (exit 0). Negative-
+  tested twice, each restored after: a tour step moved one line off its heading
+  (`harness.md:92` → `93`, a line that exists) exits 1 naming the pattern it
+  failed; a START_HERE symbol misspelt (`## Commit Guard` → `## Commit Gaurd`)
+  exits 1 naming the files that lack it. Relative links: 0 broken of 62
+  (`git ls-files '*.md' | xargs grep -o '](\([^)#]*\.md\)[^)]*)' | wc -l`).
+  Single-source grep for duplicate types: empty. `npm test` / `npm ci` /
+  `pytest` still fail as recorded at baseline, by design.
+
+- **Conditions newly PASS:** none, and none claimed. The twelve-condition
+  scorecard still stands at 0/12 against commit `5f17b04` and was not re-run.

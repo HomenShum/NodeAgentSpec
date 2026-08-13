@@ -6,17 +6,26 @@
 node .tours/validate.mjs
 ```
 
-That is the entire automated surface of this repository. It checks that every
-step of every guided tour in `.tours/` still points at a file that exists and a
-line that exists in it. It exits non-zero and names the offending step when a
-reference has drifted.
+That is the entire automated surface of this repository. It checks two sets of
+citations and exits non-zero naming each bad one:
 
-It is deliberately narrow. It proves the tours are honest. It proves nothing
+- **Guided tours.** Every step in `.tours/` carries a `pattern` — the heading or
+  type declaration it is about. The check is that the cited line *matches that
+  pattern*, not merely that the line exists. A line-range check alone proves the
+  anchor is stable and never that it is correct: insert a paragraph above a
+  section, and a step now pointing at the wrong heading still passes. That was
+  concern C7, and it was real — hardening this check immediately caught two
+  README steps that had drifted onto a table row and a bullet.
+- **`../START_HERE.md` stages.** Each stage cites files and `## Symbol`
+  headings rather than line numbers. The check is that every cited file exists
+  and every cited heading is a real heading in one of them.
+
+It is deliberately narrow. It proves the citations are honest. It proves nothing
 about whether the documents are any good.
 
 ## The checks that are commands, not scripts
 
-Two properties matter enough to verify but not enough to script. Both are one
+Three properties matter enough to verify but not enough to script. Each is one
 line, so they live here rather than in a file that would need maintaining.
 
 **Every relative link resolves** — the failure a reader meets first:
@@ -27,7 +36,17 @@ for f in $(git ls-files '*.md'); do d=$(dirname "$f"); \
     [ -f "$d/$l" ] || echo "BROKEN: $f -> $l"; done; done
 ```
 
-Expected output: nothing. 38 links checked.
+Expected output: nothing.
+
+The count of links that loop checked is its own one-liner, so the number below is
+reproducible rather than remembered — a hand-kept count is how this file came to
+claim 38 links long after there were more:
+
+```bash
+git ls-files '*.md' | xargs grep -o '](\([^)#]*\.md\)[^)]*)' | wc -l
+```
+
+Expected output: 62.
 
 **No type is defined twice** — the single-source rule from
 [CONVENTIONS.md](CONVENTIONS.md):
