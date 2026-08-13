@@ -36,6 +36,7 @@ type TraceEvent = {
 
 - `state_reduced`
 - `goal_created`
+- `goal_decomposed`
 - `goal_replaced`
 - `goal_constrained`
 - `goal_completed`
@@ -71,6 +72,7 @@ type TraceEvent = {
 - `artifact_created`
 - `artifact_updated`
 - `artifact_reviewed`
+- `artifact_merged`
 
 ### Verification
 

@@ -70,17 +70,9 @@ Merge process:
 
 ## Delegation Trace Events
 
-Recommended trace events:
-
-- `goal_decomposed`
-- `worker_scheduled`
-- `worker_started`
-- `worker_completed`
-- `worker_failed`
-- `worker_blocked`
-- `worker_canceled`
-- `worker_retried`
-- `artifact_merged`
+Delegation emits `goal_decomposed`, the `worker_*` scheduling events, and
+`artifact_merged`. All of them are defined once, with their payload rules, in
+[trace-schema.md](trace-schema.md#standard-events).
 
 ## Rule
 

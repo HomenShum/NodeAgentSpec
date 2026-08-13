@@ -82,13 +82,20 @@ Templates live in [templates/](templates/).
 
 ## How To Use
 
+New here? [docs/START_HERE.md](docs/START_HERE.md) walks all twenty documents in
+the order your system executes them, rather than the order they are listed in.
+
+Nothing in this repo runs. These steps are authoring work in *your* repo:
+
 1. Copy the files into your repo.
 2. Edit `soul.md` to match your product boundary.
 3. Define your real skills in `skills.md`.
 4. Implement the state objects from `harness.md`, `goals.md`, and `workers.md`.
 5. Add trace events from `trace-schema.md`.
 6. Build the UI from `visibility.md`.
-7. Run the tests from `evals.md` and `readiness.md`.
+7. Run the three capability tests in `evals.md` against your running system, and
+   answer every line of `readiness.md`. Both test the agent you built — this pack
+   ships no test runner of its own.
 
 ## Design Principle
 
@@ -113,12 +120,17 @@ type AgentOsRoom = {
   tasks: Task[];
   workers: WorkerRun[];
   artifacts: Artifact[];
-  world: {
-    beliefs: Belief[];
-  };
+  world: World;
   traces: TraceEvent[];
 };
 ```
+
+Each field's type is defined in exactly one document: `AgentOsPolicy` in
+[harness.md](harness.md), `Goal` in [goals.md](goals.md), `WorkerRun` in
+[workers.md](workers.md), `Artifact` in [artifact.md](artifact.md), `World` in
+[world.md](world.md), `TraceEvent` in [trace-schema.md](trace-schema.md).
+`ConversationState` and `Task` are named here but left to your product to
+define.
 
 ## License
 

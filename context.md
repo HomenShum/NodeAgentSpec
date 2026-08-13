@@ -100,11 +100,13 @@ Each claim should be classified:
 
 ## Context Failure Modes
 
-- Lost steer: user intent was spoken but never stored.
+Failures caused by what the worker was given, rather than by what it did:
+
 - Context flooding: too much transcript causes the model to miss the actual task.
-- Stale authority: old worker output overwrites a newer goal.
 - Hidden policy: model attempts a tool the room would not permit.
 - Fake memory: model remembers a fact that was never committed.
+
+The full failure catalogue is in [failure-modes.md](failure-modes.md).
 
 ## Rule
 

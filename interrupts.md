@@ -97,12 +97,13 @@ Behavior:
 
 ## Common Bugs
 
-- approval hijacked as new goal
+Bugs specific to parsing an interrupt:
+
 - trailing number hijacks target
-- negated clause wins
-- old worker commits after retarget
 - status request becomes task
-- failed turn destroys steer
+
+Approval hijack, the negation bug, stale commit after retarget, and lost steer
+are catalogued with their fixes in [failure-modes.md](failure-modes.md).
 
 ## Rule
 

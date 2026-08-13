@@ -138,14 +138,15 @@ Every loop needs:
 
 ## Bad Loop Smells
 
+Smells specific to a badly bounded loop:
+
 - unbounded "think more" calls
-- transcript-only memory
 - repeated acknowledgements
 - silent retries
 - workers that cannot be canceled
-- stale workers that still commit
 - no visible blocked state
-- no external verification
+
+The full failure catalogue is in [failure-modes.md](failure-modes.md).
 
 ## Rule
 

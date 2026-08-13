@@ -52,17 +52,10 @@ An Agent OS must not:
 
 ## Full V3 Standard
 
-A V3-grade agent room must answer:
+A V3-grade agent room must be able to answer, at any moment, what exists, what
+is running, what it produced, what it cost, what it was allowed to do, what
+failed, and what a human changed.
 
-- What goals exist?
-- Which goals are active, parallel, completed, blocked, or canceled?
-- Which workers are queued, running, completed, failed, blocked, canceled, or retried?
-- What artifacts were produced?
-- What beliefs were learned?
-- What permissions were required?
-- What budget was consumed?
-- What failed, and why?
-- What can be retried or canceled?
-- What changed because a human interrupted?
-
-If the UI and trace log cannot answer those questions, the system is not done.
+That bar is written out as a checklist in [readiness.md](readiness.md), which is
+the single place it lives. If the UI and trace log cannot answer it, the system
+is not done.

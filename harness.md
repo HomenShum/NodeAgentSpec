@@ -95,20 +95,12 @@ type AgentOsPolicy = {
   permissionWebResearch: boolean;
   permissionExternalActions: boolean;
 };
-
-type WorkerRun = {
-  id: string;
-  goalId: string;
-  taskId: string;
-  kind: string;
-  status: "queued" | "running" | "completed" | "failed" | "blocked" | "canceled";
-  attempt: number;
-  retryOf?: string;
-  error?: string;
-  createdAt: number;
-  updatedAt: number;
-};
 ```
+
+The harness also schedules `WorkerRun`, defined once in
+[workers.md](workers.md#worker-schema). Use that definition — the lifecycle
+rules in `workers.md` require fields (`startedAt`, `completedAt`) that a
+shortened copy of the type cannot satisfy.
 
 ## Commit Guard
 

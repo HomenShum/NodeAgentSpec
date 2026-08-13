@@ -1,6 +1,6 @@
 # Contributing
 
-Agent OS Markdown is intentionally plain markdown. Contributions should make the operating model clearer, more testable, and more portable.
+NodeAgentSpec is intentionally plain markdown. Contributions should make the operating model clearer, more testable, and more portable.
 
 ## Good Contributions
 

@@ -131,10 +131,63 @@ reproduction; a hunch is not a defect.
 
 | # | Severity | Journey | Reproduction | Status |
 |---|----------|---------|--------------|--------|
-| D1 | Major | J3, J5 | The last step of the repo's own quickstart cannot be performed. `README.md:91` step 7 reads "Run the tests from `evals.md` and `readiness.md`". Neither file contains a runnable test: `evals.md` is 131 lines of category prose naming what to test ("off-by-one", "stale done") with no command, and `readiness.md` is a 65-line human checklist of 37 bullets across seven
-`Readiness` sections, none of them a command. Repro: clone the repo, open `README.md`, follow "How To Use" steps 1–7; at step 7 there is nothing to execute — `npm test` exits 127 (no `package.json`), `pytest -q` exits 5 (no tests collected). A first-time adopter finishes the quickstart unable to tell whether they did it right, which is the exact outcome `CONTRIBUTING.md:26` requires changes to avoid ("The change has an observable verification path"). | OPEN |
-| D2 | Minor | J1 | Stale product name survives the rename. `CONTRIBUTING.md:3` opens "Agent OS Markdown is intentionally plain markdown", while the repo, README title and description all say NodeAgentSpec (renamed in commit `5f17b04`, "Align public naming after repo rename"). Repro: open `https://github.com/HomenShum/NodeAgentSpec/blob/main/CONTRIBUTING.md` at any width; first body line names a different product. A stranger checking whether the project is maintained reads this as an abandoned rename. | OPEN |
+| D1 | Minor (was Major) | J3, J5 | The last step of the repo's own quickstart cannot be performed. `README.md:91` step 7 reads "Run the tests from `evals.md` and `readiness.md`". Neither file contains a runnable test: `evals.md` is 131 lines of category prose naming what to test ("off-by-one", "stale done") with no command, and `readiness.md` is a 65-line human checklist of 37 bullets across seven
+`Readiness` sections, none of them a command. Repro: clone the repo, open `README.md`, follow "How To Use" steps 1–7; at step 7 there is nothing to execute — `npm test` exits 127 (no `package.json`), `pytest -q` exits 5 (no tests collected). A first-time adopter finishes the quickstart unable to tell whether they did it right, which is the exact outcome `CONTRIBUTING.md:26` requires changes to avoid ("The change has an observable verification path"). | PARTIALLY FIXED 2026-08-13 (human-readiness wave). The false instruction is gone: `README.md` step 7 now says the capability tests in `evals.md` and the checklist in `readiness.md` run against *the reader's* system, and that this pack ships no test runner. **Not closed** — a reader still has no signal that their adoption was done correctly. Downgraded Major -> Minor; remainder tracked as C1 in `docs/codebase/CONCERNS.md`. |
+| D2 | Minor | J1 | Stale product name survives the rename. `CONTRIBUTING.md:3` opens "Agent OS Markdown is intentionally plain markdown", while the repo, README title and description all say NodeAgentSpec (renamed in commit `5f17b04`, "Align public naming after repo rename"). Repro: open `https://github.com/HomenShum/NodeAgentSpec/blob/main/CONTRIBUTING.md` at any width; first body line names a different product. A stranger checking whether the project is maintained reads this as an abandoned rename. | FIXED 2026-08-13 (human-readiness wave). `CONTRIBUTING.md:3` now reads "NodeAgentSpec is intentionally plain markdown." |
 
 ## Iterations
 
-_none yet_
+### Human-readiness wave — 2026-08-13
+
+Not a promotion iteration. This is the second loop (HUMAN_READY), which asks
+whether a stranger can maintain the repository rather than whether a stranger can
+use the product. The twelve-condition scorecard in `PRODUCT_GOAL.md` was **not**
+re-measured and its 0/12 still stands against commit `5f17b04`.
+
+- **Journey exercised:** none in a browser. This wave changed no rendered
+  behaviour that a journey covers; J1's three cited README regions (the mermaid
+  block, "The Contract", the File Map) were deliberately left untouched, and
+  soul.md keeps its four `h2` headings so J2's recorded evidence stays true.
+
+- **Observed:** four single-source violations, each of which gives a reader two
+  different answers to one question.
+  1. `WorkerRun` defined twice — `harness.md` and `workers.md` — and the
+     `harness.md` copy omitted `startedAt`/`completedAt`, which `workers.md`
+     declares mandatory. Copying it produced a type the pack rejects. Confirmed
+     independently by `npx jscpd --min-lines 3 --min-tokens 15` as a 5-line
+     typescript clone.
+  2. `delegation.md` listed nine trace events, two of them — `goal_decomposed`,
+     `artifact_merged` — absent from `trace-schema.md`, the file that claims to be
+     the standard vocabulary.
+  3. Three acceptance bars for one thing: `README.md` "The Contract" (9
+     questions), `soul.md` "Full V3 Standard" (10), `readiness.md` (37 bullets).
+  4. Six failures carrying two to four names each across `failure-modes.md`,
+     `world.md`, `loop.md`, `context.md`, `interrupts.md` — "Stale Commit" alone
+     appeared under four different names.
+  Plus a contradiction: `README.md` typed the room's `world` as holding only
+  beliefs while `world.md` gave `World` eight fields, and both claimed `artifacts`.
+
+- **Fixed:** duplicate `WorkerRun` deleted from `harness.md`; the two orphan
+  events added to `trace-schema.md` and `delegation.md`'s list replaced by a
+  link; `soul.md`'s V3 list folded into `readiness.md` (keeping the heading, and
+  gaining its one unique question as "The effect of a human interrupt is
+  visible."); 15 restated failure bullets removed from four files, each now
+  linking to the one catalogue; `README.md` room shape now says `world: World`
+  and `world.md` drops the duplicate `artifacts`. D2 fixed, D1 downgraded.
+
+- **Re-proved:** three greps that return empty only when the property holds —
+  no type defined twice, no trace-event list outside `trace-schema.md`, no
+  surviving alias for the stale-commit failure. Commands and before/after values
+  in `docs/SIMPLIFICATION_REPORT.md`.
+
+- **Tests:** `node .tours/validate.mjs` → `OK: 28 steps across 3 tours resolve`
+  (exit 0). Negative-tested: a tour with a past-end line, a missing file and a
+  zero line exits 1 naming all three. Relative-link check: 0 broken of 46.
+  `npx jscpd` clones 4 → 2, both remaining intentional. `npm test` / `npm ci` /
+  `pytest` still fail as recorded at baseline; that is unchanged and by design.
+
+- **Conditions newly PASS:** none, and none claimed. This wave did not re-run the
+  promotion gate. Condition 2 (no critical or major usability defect open) is the
+  one plausibly affected — D1 is downgraded and D2 fixed — but a status change is
+  a promotion-loop judgement made against the rendered product, not a
+  documentation wave's to award itself.

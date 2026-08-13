@@ -114,11 +114,15 @@ type World = {
   devices: Device[];
   tools: Tool[];
   beliefs: Belief[];
-  artifacts: Artifact[];
   risks: Risk[];
   constraints: Constraint[];
 };
 ```
+
+`World` holds what the room is operating *on*. The work itself — goals, tasks,
+workers, artifacts, traces — lives on the room, not in `World`. Artifacts are
+described as an entity above because the world model has to name them; they are
+stored in `AgentOsRoom.artifacts`.
 
 ## Time
 
@@ -153,13 +157,14 @@ The harness should expose environment facts as state, not as hidden assumptions.
 
 ## Missing World Model Symptoms
 
+These are the symptoms specific to a missing world model:
+
 - user asks a new goal and the old goal is overwritten accidentally
 - agents claim current facts without research
-- workers keep running after cancellation
 - phone and laptop disagree about state
-- the UI shows transcript but not internal state
-- a failed tool call erases the user steer
-- the model says "done" but no artifact exists
+
+The full failure catalogue, including the ones these lead to, is in
+[failure-modes.md](failure-modes.md).
 
 ## Rule
 

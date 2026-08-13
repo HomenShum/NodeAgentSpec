@@ -20,6 +20,7 @@ Readiness is the checklist before claiming an agent system is real.
 - Users can cancel workers.
 - Users can retry failed or blocked workers.
 - Users can inspect internal state.
+- The effect of a human interrupt is visible.
 
 ## Permission Readiness
 
