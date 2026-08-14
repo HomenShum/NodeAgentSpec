@@ -1,7 +1,7 @@
 {
   "generatedBy": "promotion/evidence/audit.mjs",
-  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
-  "measuredAt": "2026-08-14T01:53:47.995Z",
+  "commit": "2372a826561e681fcb804e81a2928bd0fbee55d1",
+  "measuredAt": "2026-08-14T01:58:12.024Z",
   "suite": {
     "command": "node .tours/validate.mjs",
     "exitCode": 0,

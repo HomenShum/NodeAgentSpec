@@ -1,7 +1,7 @@
 {
   "generatedBy": "promotion/evidence/audit.mjs",
-  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
-  "measuredAt": "2026-08-14T01:53:47.865Z",
+  "commit": "2372a826561e681fcb804e81a2928bd0fbee55d1",
+  "measuredAt": "2026-08-14T01:58:11.907Z",
   "method": "HTTP GET of the rendered GitHub page; substring assertion against the served HTML",
   "checks": [
     {
@@ -10,7 +10,7 @@
       "mustContain": "ships no test runner",
       "note": "README 'How To Use' step 7 no longer promises tests that do not exist.",
       "httpStatus": 200,
-      "bytes": 337099,
+      "bytes": 337087,
       "fixedStringPresent": true,
       "staleStringAbsent": true,
       "ok": true
@@ -22,7 +22,7 @@
       "mustNotContain": "Agent OS Markdown is intentionally",
       "note": "Stale pre-rename product name is gone from the first body line.",
       "httpStatus": 200,
-      "bytes": 237845,
+      "bytes": 237833,
       "fixedStringPresent": true,
       "staleStringAbsent": true,
       "ok": true

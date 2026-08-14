@@ -1,7 +1,7 @@
 {
   "generatedBy": "promotion/evidence/audit.mjs",
-  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
-  "measuredAt": "2026-08-14T01:53:47.593Z",
+  "commit": "2372a826561e681fcb804e81a2928bd0fbee55d1",
+  "measuredAt": "2026-08-14T01:58:10.736Z",
   "checklistSource": "https://vercel.com/design/guidelines",
   "checklistFetched": "2026-08-13",
   "reviewedSurface": "the 40 markdown documents this repo authors, as GitHub renders them",
@@ -51,7 +51,7 @@
   "itemsReviewed": 37,
   "measured": {
     "markdownFiles": 41,
-    "headings": 381,
+    "headings": 382,
     "relativeMarkdownLinks": 62
   },
   "findings": [],
