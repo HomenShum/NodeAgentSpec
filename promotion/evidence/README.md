@@ -36,6 +36,28 @@ resolving every finding to the host that served the offending bytes is evidence:
 That is why the good numbers in `lighthouse-github-readme.json` — accessibility
 97, best-practices 100 — are not in a PASS row.
 
+## Re-running dirties every file, and that is correct
+
+Verified from a fresh clone at commit `d1dc724`: the script runs green and
+`git status` then shows all seven generated files modified. Nothing is wrong.
+Every artifact carries a `measuredAt` timestamp, and the two audits re-measure
+live servers.
+
+What must not move is the conclusion. Check these instead of the diff:
+
+| Field | Value |
+|---|---|
+| `attribution.json` → `verdict.findingsThisRepoCanFix` | 0 |
+| `attribution.json` → every `failingAudits[].owner` | `github-platform` |
+| `wig-review.json` → `majorFindings` | 0 |
+| `surface-inventory.json` → `renderableSourceFileCount` | 0 |
+| `surface-inventory.json` → `positiveControl.returned` | non-zero |
+| `rendered-defect-check.json` → `allPassed` | true |
+| `test-run.json` → `green` | true |
+
+Lighthouse `performance` is deliberately excluded from that list. It read 32,
+34, 45 and 47 across four runs against an unchanged repo. Treat it as weather.
+
 ## A zero needs a control
 
 `surface-inventory.json` carries a `positiveControl` field, and the script exits
