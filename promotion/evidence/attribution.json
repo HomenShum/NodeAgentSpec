@@ -1,0 +1,373 @@
+{
+  "generatedBy": "promotion/evidence/audit.mjs",
+  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
+  "measuredAt": "2026-08-14T01:53:48.025Z",
+  "urlAudited": "https://github.com/HomenShum/NodeAgentSpec",
+  "whyThisUrl": "The reduced gate judges a package on the surface a stranger meets. This pack has no demo page and no example app, so the only page that exists is GitHub rendering its markdown.",
+  "commands": {
+    "axe": "npx --yes @axe-core/cli@4.13.0 https://github.com/HomenShum/NodeAgentSpec --save promotion/evidence/axe-fullpage.json",
+    "lighthouse": "npx --yes lighthouse@13.4.1 https://github.com/HomenShum/NodeAgentSpec --output=json --output-path=promotion/evidence/lighthouse-github-readme.json --chrome-flags=\"--headless\" --quiet"
+  },
+  "lighthouse": {
+    "version": "13.4.1",
+    "fetchTime": "2026-08-14T01:51:09.551Z",
+    "scores": {
+      "performance": 45,
+      "accessibility": 97,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "coreWebVitals": {
+      "lcpMs": 9982,
+      "cls": 0.0001966605349765706,
+      "tbtMs": 443,
+      "fcpMs": 9382
+    },
+    "consoleErrors": 0,
+    "failedNetworkRequests": [],
+    "failingAudits": [
+      {
+        "audit": "first-contentful-paint",
+        "category": "performance",
+        "score": 0,
+        "title": "First Contentful Paint",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "largest-contentful-paint",
+        "category": "performance",
+        "score": 0,
+        "title": "Largest Contentful Paint",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "speed-index",
+        "category": "performance",
+        "score": 0.12,
+        "title": "Speed Index",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "total-blocking-time",
+        "category": "performance",
+        "score": 0.63,
+        "title": "Total Blocking Time",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "max-potential-fid",
+        "category": "performance",
+        "score": 0.07,
+        "title": "Max Potential First Input Delay",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "interactive",
+        "category": "performance",
+        "score": 0.08,
+        "title": "Time to Interactive",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "mainthread-work-breakdown",
+        "category": "performance",
+        "score": 0,
+        "title": "Minimize main-thread work",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "bootup-time",
+        "category": "performance",
+        "score": 0,
+        "title": "Reduce JavaScript execution time",
+        "evidenceHosts": [
+          "github.com",
+          "github.githubassets.com"
+        ],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "target-size",
+        "category": "accessibility",
+        "score": 0,
+        "title": "Touch targets do not have sufficient size or spacing.",
+        "evidenceHosts": [],
+        "exampleSelectors": [
+          "nav > ul.list-style-none > li.mx-2 > a.Link--secondary",
+          "nav > ul.list-style-none > li.mx-2 > a.Link--secondary",
+          "nav > ul.list-style-none > li.mx-2 > a.Link--secondary"
+        ],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "unused-css-rules",
+        "category": "performance",
+        "score": 0,
+        "title": "Reduce unused CSS",
+        "evidenceHosts": [
+          "github.githubassets.com"
+        ],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "unused-javascript",
+        "category": "performance",
+        "score": 0,
+        "title": "Reduce unused JavaScript",
+        "evidenceHosts": [
+          "github.githubassets.com"
+        ],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "cache-insight",
+        "category": "performance",
+        "score": 0.5,
+        "title": "Use efficient cache lifetimes",
+        "evidenceHosts": [
+          "viewscreen.githubusercontent.com",
+          "avatars.githubusercontent.com"
+        ],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "duplicated-javascript-insight",
+        "category": "performance",
+        "score": 0,
+        "title": "Duplicated JavaScript",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "forced-reflow-insight",
+        "category": "performance",
+        "score": 0,
+        "title": "Forced reflow",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "network-dependency-tree-insight",
+        "category": "performance",
+        "score": 0,
+        "title": "Network dependency tree",
+        "evidenceHosts": [],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      },
+      {
+        "audit": "render-blocking-insight",
+        "category": "performance",
+        "score": 0,
+        "title": "Render-blocking requests",
+        "evidenceHosts": [
+          "github.githubassets.com"
+        ],
+        "exampleSelectors": [],
+        "owner": "github-platform",
+        "repoCanFix": false
+      }
+    ]
+  },
+  "axe": {
+    "violations": 0,
+    "incomplete": 3,
+    "passingNodes": 2060,
+    "findings": [
+      {
+        "rule": "aria-valid-attr-value",
+        "state": "incomplete",
+        "impact": "critical",
+        "target": [
+          "#action-menu-0f171fa7-e415-4e9e-af3d-2cf3333d86d8-button"
+        ],
+        "contentAuthoredByRepo": false,
+        "propertyOwnedByRepo": false,
+        "note": "GitHub application chrome."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "a[aria-label=\"Commit b1c1749\"]"
+        ],
+        "contentAuthoredByRepo": false,
+        "propertyOwnedByRepo": false,
+        "note": "GitHub application chrome."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"112.296875\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"131.3125\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"39.015625\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"36.734375\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"57.203125\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"122.078125\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"61.625\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"139.796875\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"45.28125\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "color-contrast",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          "iframe",
+          "foreignobject[width=\"124.59375\"] > div > .nodeLabel > p"
+        ],
+        "contentAuthoredByRepo": true,
+        "propertyOwnedByRepo": false,
+        "note": "Text comes from README.md; the audited property (rendered contrast) comes from GitHub's mermaid theme, which a fenced code block cannot set."
+      },
+      {
+        "rule": "th-has-data-cells",
+        "state": "incomplete",
+        "impact": "serious",
+        "target": [
+          ".Table-module__Box__HZKiQ"
+        ],
+        "contentAuthoredByRepo": false,
+        "propertyOwnedByRepo": false,
+        "note": "GitHub application chrome."
+      }
+    ]
+  },
+  "verdict": {
+    "findingsTotal": 29,
+    "findingsThisRepoCanFix": 0,
+    "statement": "Every finding is a property of github.com's application. This repo ships 0 bytes of browser-executed code and 0 renderable source files, so conditions 7 and 8 have no surface of this repo's to land on. Recording the scores above as PASS would credit this pack with GitHub's engineering."
+  }
+}

@@ -132,10 +132,101 @@ reproduction; a hunch is not a defect.
 | # | Severity | Journey | Reproduction | Status |
 |---|----------|---------|--------------|--------|
 | D1 | Minor (was Major) | J3, J5 | The last step of the repo's own quickstart cannot be performed. `README.md:91` step 7 reads "Run the tests from `evals.md` and `readiness.md`". Neither file contains a runnable test: `evals.md` is 131 lines of category prose naming what to test ("off-by-one", "stale done") with no command, and `readiness.md` is a 65-line human checklist of 37 bullets across seven
-`Readiness` sections, none of them a command. Repro: clone the repo, open `README.md`, follow "How To Use" steps 1–7; at step 7 there is nothing to execute — `npm test` exits 127 (no `package.json`), `pytest -q` exits 5 (no tests collected). A first-time adopter finishes the quickstart unable to tell whether they did it right, which is the exact outcome `CONTRIBUTING.md:26` requires changes to avoid ("The change has an observable verification path"). | PARTIALLY FIXED 2026-08-13 (human-readiness wave). The false instruction is gone: `README.md` step 7 now says the capability tests in `evals.md` and the checklist in `readiness.md` run against *the reader's* system, and that this pack ships no test runner. **Not closed** — a reader still has no signal that their adoption was done correctly. Downgraded Major -> Minor; remainder tracked as C1 in `docs/codebase/CONCERNS.md`. |
-| D2 | Minor | J1 | Stale product name survives the rename. `CONTRIBUTING.md:3` opens "Agent OS Markdown is intentionally plain markdown", while the repo, README title and description all say NodeAgentSpec (renamed in commit `5f17b04`, "Align public naming after repo rename"). Repro: open `https://github.com/HomenShum/NodeAgentSpec/blob/main/CONTRIBUTING.md` at any width; first body line names a different product. A stranger checking whether the project is maintained reads this as an abandoned rename. | FIXED 2026-08-13 (human-readiness wave). `CONTRIBUTING.md:3` now reads "NodeAgentSpec is intentionally plain markdown." |
+`Readiness` sections, none of them a command. Repro: clone the repo, open `README.md`, follow "How To Use" steps 1–7; at step 7 there is nothing to execute — `npm test` exits 127 (no `package.json`), `pytest -q` exits 5 (no tests collected). A first-time adopter finishes the quickstart unable to tell whether they did it right, which is the exact outcome `CONTRIBUTING.md:26` requires changes to avoid ("The change has an observable verification path"). | PARTIALLY FIXED 2026-08-13 (human-readiness wave). The false instruction is gone: `README.md` step 7 now says the capability tests in `evals.md` and the checklist in `readiness.md` run against *the reader's* system, and that this pack ships no test runner. **Not closed** — a reader still has no signal that their adoption was done correctly. Downgraded Major -> Minor; remainder tracked as C1 in `docs/codebase/CONCERNS.md`. **Downgrade confirmed in the rendered page 2026-08-13 (audit wave):** the served README HTML contains "ships no test runner", so the impossible step-7 instruction is gone for a real reader, not just in the working tree — `promotion/evidence/rendered-defect-check.json`. |
+| D2 | Minor | J1 | Stale product name survives the rename. `CONTRIBUTING.md:3` opens "Agent OS Markdown is intentionally plain markdown", while the repo, README title and description all say NodeAgentSpec (renamed in commit `5f17b04`, "Align public naming after repo rename"). Repro: open `https://github.com/HomenShum/NodeAgentSpec/blob/main/CONTRIBUTING.md` at any width; first body line names a different product. A stranger checking whether the project is maintained reads this as an abandoned rename. | FIXED 2026-08-13 (human-readiness wave). `CONTRIBUTING.md:3` now reads "NodeAgentSpec is intentionally plain markdown." **Confirmed in the rendered page 2026-08-13 (audit wave):** the served HTML for that file contains the new string and does not contain "Agent OS Markdown is intentionally" — `promotion/evidence/rendered-defect-check.json`. |
 
 ## Iterations
+
+### Audit wave — 2026-08-13 (commit `b1c1749`)
+
+The first wave with working audit tooling. Lighthouse 13.4.1 and @axe-core/cli
+4.13.0 both install and run on the measuring machine, which is what the baseline
+lacked, so conditions 7 and 8 could finally be attempted instead of deferred.
+
+- **Journey exercised:** J1's surface, twice, headless — once under axe, once
+  under Lighthouse — plus a direct re-read of the served HTML for J1 and J2's
+  two documents. No width sweep; this wave added no viewport probe, so condition
+  4 is untouched.
+
+- **Observed.** Both audits returned good numbers for the page a stranger loads:
+  Lighthouse accessibility 97, best-practices 100, SEO 100, axe 0 violations
+  across 2,059 nodes. **Every one of those numbers is GitHub's.** All 16 failing
+  Lighthouse audits and all 13 axe findings resolve to `github.com` or
+  `github.githubassets.com`: `unused-javascript` is primer-react and react-core,
+  all 9 `target-size` failures are GitHub's footer nav links and cookie-consent
+  button, and the only axe findings touching text this repo wrote are the ten
+  mermaid node labels from README.md — whose *text* is ours but whose *contrast*
+  is set by GitHub's mermaid theme, which a fenced code block cannot reach.
+  This pack ships 0 bytes of browser-executed code, so the count of findings it
+  could fix is 0 of 29 by construction, not by luck.
+
+  Written into a PASS row, "accessibility 97" would have credited this pack with
+  GitHub's accessibility team. That is the specific trade this wave refused, and
+  the attribution — not the score — is why the refusal is auditable.
+
+  A second reading points the same way. Three Lighthouse runs minutes apart
+  against an unchanged repo returned performance 32, 34 and 45, with TBT moving
+  1,051 ms → 443 ms. A metric that swings 40% while the repo holds still is not
+  describing the repo. The scorecard cites the committed run and says so; an
+  earlier draft of it quoted the first run's numbers and was corrected before
+  commit, because a number quoted from a run that predates the artifact it cites
+  is the stale-measurement failure this log exists to catch.
+
+- **Caught in my own instrument, before it shipped.** The first version of
+  `audit.mjs` built its git pathspecs through a shell: `git ls-files '*.html'`.
+  Under bash that returns the matches; under cmd.exe the quotes are not stripped,
+  git matches a literal `'*.html'`, and the command returns nothing. It wrote
+  `renderableSourceFileCount: 0` and `scriptsInRepo: []` into a committed receipt
+  — and `.tours/validate.mjs` demonstrably exists, so the second zero was
+  provably false and the first was worthless. **A zero that means "the command
+  did not run" is indistinguishable from a zero that means "the repo has no UI",
+  and the entire not-applicable verdict for conditions 7 and 8 rested on it.**
+  Fixed by passing pathspecs to git as argv instead of through a shell, and by
+  adding a positive control: `git ls-files *.md` must return non-zero in a
+  markdown-only repo, and the script refuses to emit any evidence if it does not.
+  The control now reads 41 and `scriptsInRepo` correctly finds the guard.
+
+  The content review then caught a defect in this very wave's prose: three
+  periods where an ellipsis belongs, in the condition 9 row of the scorecard I
+  had just written. Fixed. A gate that never fails its author is not a gate.
+
+- **Fixed:** nothing in the product. This wave changed no document a reader sees;
+  its output is `promotion/evidence/` and the scorecard rows it can now support.
+
+- **Re-proved:** `promotion/evidence/audit.mjs` regenerates all six artifacts
+  from a clean directory in one run. The WIG content review was negative-tested
+  by appending a skipped heading level, a dead relative link and a three-period
+  ellipsis to `goals.md`: the probe reported all three (2 major, 1 minor), and
+  reported 0 again after the file was restored (`git status --porcelain` clean).
+  A check that cannot fail is not a check.
+
+- **Tests:** `node .tours/validate.mjs` → `OK: 28 tour steps across 3 tours match
+  their patterns; 39 START_HERE citations resolve.` (exit 0), receipt at
+  `promotion/evidence/test-run.json`. Relative links 62, matching the count
+  `docs/codebase/TESTING.md` already owns — an independent instrument arriving at
+  the documented number.
+
+- **Conditions newly PASS: 2 and 11.**
+  - **2** (no critical or major defect open): the ledger's D2 is fixed and D1 is
+    downgraded to Minor, and both are now confirmed in the HTML GitHub serves
+    rather than in the working tree — `rendered-defect-check.json`, 2/2. The
+    previous wave explicitly declined to award this to itself because a status
+    change belongs to a promotion loop judging the rendered product. This is that
+    loop, and that is the judgement.
+  - **11** (tests and build green): the baseline's "nothing to run" was true when
+    written and went stale when `.tours/validate.mjs` landed. It runs, it is
+    committed, it is re-runnable from a fresh clone, and its output is now
+    retained. There is no build step, which the receipt says rather than skips.
+
+- **Conditions deliberately NOT moved.** 7 and 8 stay off PASS despite the audits
+  having actually run, because a repo with zero renderable source files has no
+  subject for either; 6 stays off PASS because its keyboard half was never
+  exercised and its axe half grades GitHub's markup; 9 stays off PASS because one
+  page load is not a journey; 10 stays off both PASS and FAIL because the number
+  measured belongs to someone else's bundle. 4 is untouched — its honest
+  "probe not retained" is still the state, and this wave did not rescue it,
+  because writing a viewport probe purely to turn a cell green is the move the
+  2026-08-13 correction already refused.
 
 ### Human-readiness wave — 2026-08-13
 

@@ -1,0 +1,32 @@
+{
+  "generatedBy": "promotion/evidence/audit.mjs",
+  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
+  "measuredAt": "2026-08-14T01:53:47.865Z",
+  "method": "HTTP GET of the rendered GitHub page; substring assertion against the served HTML",
+  "checks": [
+    {
+      "defect": "D1",
+      "url": "https://github.com/HomenShum/NodeAgentSpec",
+      "mustContain": "ships no test runner",
+      "note": "README 'How To Use' step 7 no longer promises tests that do not exist.",
+      "httpStatus": 200,
+      "bytes": 337099,
+      "fixedStringPresent": true,
+      "staleStringAbsent": true,
+      "ok": true
+    },
+    {
+      "defect": "D2",
+      "url": "https://github.com/HomenShum/NodeAgentSpec/blob/main/CONTRIBUTING.md",
+      "mustContain": "NodeAgentSpec is intentionally plain markdown",
+      "mustNotContain": "Agent OS Markdown is intentionally",
+      "note": "Stale pre-rename product name is gone from the first body line.",
+      "httpStatus": 200,
+      "bytes": 237845,
+      "fixedStringPresent": true,
+      "staleStringAbsent": true,
+      "ok": true
+    }
+  ],
+  "allPassed": true
+}

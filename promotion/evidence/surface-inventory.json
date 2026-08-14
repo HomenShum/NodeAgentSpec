@@ -1,0 +1,23 @@
+{
+  "generatedBy": "promotion/evidence/audit.mjs",
+  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
+  "measuredAt": "2026-08-14T01:53:47.482Z",
+  "command": "git ls-files *.html *.htm *.tsx *.jsx *.vue *.svelte *.astro *.css *.scss *.sass *.less",
+  "positiveControl": {
+    "command": "git ls-files *.md",
+    "returned": 41,
+    "meaning": "non-zero, so the probe runs and the zeros below are real absences"
+  },
+  "renderableSourceFiles": [],
+  "renderableSourceFileCount": 0,
+  "serverOrBuildManifests": [],
+  "scriptsInRepo": [
+    {
+      "path": ".tours/validate.mjs",
+      "bytes": 5364,
+      "reachesABrowser": false
+    }
+  ],
+  "bytesOfBrowserExecutedCodeShipped": 0,
+  "conclusion": "No rendered surface authored by this repo: 0 renderable source files, 0 server or build manifests."
+}

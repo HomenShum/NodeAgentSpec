@@ -1,0 +1,12 @@
+{
+  "generatedBy": "promotion/evidence/audit.mjs",
+  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
+  "measuredAt": "2026-08-14T01:53:47.995Z",
+  "suite": {
+    "command": "node .tours/validate.mjs",
+    "exitCode": 0,
+    "stdout": "OK: 28 tour steps across 3 tours match their patterns; 39 START_HERE citations resolve."
+  },
+  "buildStep": "none — this pack has no package manifest and no build; there is nothing to compile.",
+  "green": true
+}

@@ -1,0 +1,60 @@
+{
+  "generatedBy": "promotion/evidence/audit.mjs",
+  "commit": "b1c1749848f5849c8bd8d684fa74d481d4726cb9",
+  "measuredAt": "2026-08-14T01:53:47.593Z",
+  "checklistSource": "https://vercel.com/design/guidelines",
+  "checklistFetched": "2026-08-13",
+  "reviewedSurface": "the 40 markdown documents this repo authors, as GitHub renders them",
+  "sections": {
+    "Interactions": {
+      "items": 27,
+      "subject": false,
+      "why": "Keyboard, focus rings, hit targets, tooltips, drag. Requires CSS/JS; this pack ships none."
+    },
+    "Animations": {
+      "items": 10,
+      "subject": false,
+      "why": "Ships no animation."
+    },
+    "Layout": {
+      "items": 7,
+      "subject": false,
+      "why": "Authors no layout; every pixel of position is GitHub's."
+    },
+    "Content": {
+      "items": 23,
+      "subject": "partial",
+      "why": "Heading hierarchy, dead ends and typography ARE authored here. Reviewed below."
+    },
+    "Forms": {
+      "items": 19,
+      "subject": false,
+      "why": "Ships no form control."
+    },
+    "Performance": {
+      "items": 15,
+      "subject": false,
+      "why": "Ships no browser-executed byte; see attribution.json."
+    },
+    "Design": {
+      "items": 11,
+      "subject": false,
+      "why": "Colour, shadow and radius come from GitHub's theme."
+    },
+    "Copywriting": {
+      "items": 14,
+      "subject": true,
+      "why": "Prose is the entire product. Reviewed below."
+    }
+  },
+  "itemsWithNoSubjectInThisRepo": 89,
+  "itemsReviewed": 37,
+  "measured": {
+    "markdownFiles": 41,
+    "headings": 381,
+    "relativeMarkdownLinks": 62
+  },
+  "findings": [],
+  "majorFindings": [],
+  "statement": "Reviewed, not scored. 89 of ~130 guidelines govern CSS, JS, focus and network behaviour this pack does not author, so they have no subject here — that is recorded as no-subject, never as pass. The 37 content and copywriting guidelines that DO have a subject were reviewed against the authored markdown and produced the findings above. This review is not derived from any Lighthouse audit."
+}
