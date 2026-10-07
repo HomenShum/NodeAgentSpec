@@ -10,6 +10,8 @@ The core idea is simple:
 
 This pack is intentionally framework-neutral. Use it with a local script, a hosted agent runtime, a voice room, a coding harness, a browser agent, or a multi-agent workflow engine.
 
+Start with [docs/START_HERE.md](docs/START_HERE.md) to adapt the pack; read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes.
+
 ## What This Gives You
 
 - A constitution for agent behavior.
