@@ -335,3 +335,30 @@ documentation drift and one was the check that should have caught it.
 
 - **Conditions newly PASS:** none, and none claimed. The twelve-condition
   scorecard still stands at 0/12 against commit `5f17b04` and was not re-run.
+
+### Documentation citation CI repair — 2026-10-08
+
+This is a documentation-maintenance result, not a promotion iteration.
+
+- **Journey exercised:** a developer or coding agent follows the README,
+  reading guide and clickable tours before adapting the specification pack.
+- **Observed:** at main `44dd483caf7f54562f7abfd2a53a63f435a93499`, the
+  unchanged checker exits 1 with five broken citations: four README tour lines
+  and the reading guide's missing `# NodeAgentSpec` heading.
+- **Fixed:** the authored README heading is restored outside the unchanged
+  generated branding; the four README tour anchors are 14, 55, 103 and 130.
+  The README, reading guide and tour distinguish the absent agent runtime and
+  capability-test runner from this pack's existing documentation checker.
+- **Local before/new:** on Windows with Node 22.22.2,
+  `node .tours/validate.mjs` exits 1 before the repair and 0 afterward:
+  `OK: 28 tour steps across 3 tours match their patterns; 39 START_HERE citations resolve.`
+  A final invocation after the wording corrections returns that same result.
+  The checker, all 28 steps and their patterns are retained.
+- **Automatic check:** `.github/workflows/citations.yml` runs only the existing
+  checker on pull requests and main pushes, using pinned official actions,
+  read-only repository permission and no dependency installation or cache.
+- **At this local capture:** hosted PR/main CI is NOT_RUN. The result proves
+  local documentation citations, not agent capability, adoption success,
+  rendered presentation, responsiveness, SEO or product readiness.
+- **Conditions newly PASS:** none. The existing promotion scorecard and
+  unresolved adoption-verification gap are unchanged.

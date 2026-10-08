@@ -12,18 +12,18 @@ actual problem is that they cannot yet write down what "working" would mean —
 which things the system must remember, which it must show on screen, which it
 must refuse to do without asking.
 
-**This repository is the paperwork for that, not a program.** It is twenty-seven
-markdown documents you copy into your own repository and edit until they describe
-your product. Nothing here executes. There is no package to install, no server to
-start, no test to run. In the vocabulary the rest of this document uses, it is a
-*markdown specification pack*.
+**This repository is a specification pack, not an agent runtime.** Its
+markdown documents are copied into your own repository and edited to describe
+your product. There is no package to install or agent server to start.
+The existing `node .tours/validate.mjs` checker validates this pack's tour
+anchors and reading-guide citations. It does not test the agent you build.
 
-So a walkthrough of this repository cannot be a walkthrough of running code.
+So this walkthrough describes adopting a specification, not running an agent.
 
-## What "runtime order" means when nothing runs
+## What "runtime order" means in a specification pack
 
 The usual version of this document follows one button press down through the
-code. This repository has no button and no code. But it is not shapeless either:
+agent implementation. This pack has no agent button or runtime. But it is not shapeless either:
 the twenty documents describe **one system, and that system has an execution
 order**. A request arrives, it is classified, work is scheduled, tools are
 called, something durable is written, the screen updates, something fails, and a
@@ -86,7 +86,7 @@ the README, not a failure.
 
 **Why this exists**
 This is the primary user action of the whole repository, and it is a copy
-operation. There is no other action. Everything after this step happens in the
+operation. The agent's implementation and tests after this step belong in the
 reader's repository, not this one.
 
 **Core code**
@@ -103,7 +103,7 @@ a capability (`skill-template.md`), one for a background job
 workspace (`room-template.md`).
 
 **Input** — an empty or existing repository belonging to the reader.
-**Output** — twenty-seven documents in their repository, initially generic.
+**Output** — the specification documents in their repository, initially generic.
 **Failure behavior** — copying without editing. A generic `soul.md` that still
 describes no particular product is the common failure here; nobody on the team
 trusts a constitution that was never written for them.
@@ -340,8 +340,8 @@ worker failure). `readiness.md` is the checklist to walk before telling anyone
 the system is real, ending with a section called Honesty Readiness.
 
 **These tests run against the reader's system, not against this repository.**
-This pack contains no test runner, and adding one would make it a program rather
-than paperwork. The repository's own automated check is narrow and covers only
+This pack contains no capability-test runner; those tests belong in your system.
+The repository's own automated check is narrow and covers only
 itself:
 
 ```bash

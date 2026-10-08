@@ -11,6 +11,8 @@
 <p align="center"><a href="docs/START_HERE.md">Code&nbsp;walkthrough</a> · <a href="https://homenshum.github.io/">All&nbsp;projects</a></p>
 <!-- brand:end -->
 
+# NodeAgentSpec
+
 > A portable markdown spec pack for building durable, inspectable AI agent systems.
 
 NodeAgentSpec is a repo of plain `.md` operating documents for teams building agents that do real work: goals, workers, memory, tools, permissions, traces, artifacts, and human steering.
@@ -68,8 +70,8 @@ If the system cannot answer those questions, it is not yet an agent operating sy
 
 ## File Map
 
-**Nothing in this repo runs.** Every row below is a document you copy into your
-own repository and edit — not a source tree. New here?
+**This pack ships no agent runtime.** Every row below is a document you copy into your
+own repository and edit — not an application source tree. New here?
 [docs/START_HERE.md](docs/START_HERE.md) walks all twenty in the order your
 system executes them, rather than the order this table lists them.
 
@@ -110,7 +112,7 @@ These steps are authoring work in *your* repo:
 6. Build the UI from `visibility.md`.
 7. Run the three capability tests in `evals.md` against your running system, and
    answer every line of `readiness.md`. Both test the agent you built — this pack
-   ships no test runner of its own.
+   ships no agent test runner; `node .tours/validate.mjs` checks this pack's citations.
 
 ## Design Principle
 
