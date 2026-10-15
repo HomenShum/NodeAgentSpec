@@ -41,6 +41,18 @@ Test:
 - stale completion guard
 - artifact write
 
+Exercise the Commit Guard in the consuming runtime; this pack contains no runtime:
+
+- Pause a real worker after preliminary eligibility reads. Persist cancellation,
+  replace its attempt, or revoke the permission needed to publish (separate runs),
+  then release completion. No late output becomes current, no completed status
+  overwrites the canceled/replacement state, and history and rejection traces remain.
+- Include completion with and without an artifact. With eligibility unchanged,
+  completion succeeds; when completion commits before cancellation, retain that history.
+- Repeat with overlapping attempts in a burst and across sustained cancel/retry cycles.
+  Keep attempt identities and prior failures visible; inspect actual state, artifacts
+  and traces rather than treating a model's final answer as proof.
+
 ### UI Evals
 
 Test:

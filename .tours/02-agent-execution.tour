@@ -50,7 +50,7 @@
       "line": 105,
       "pattern": "## Commit Guard",
       "title": "Step 7 - the six checks before anything is committed",
-      "description": "The most operationally important sequence in the pack. Before a worker writes its result: re-read the worker, confirm it is still running, confirm the attempt still matches, confirm the goal was not cancelled, confirm policy still allows the write, then commit atomically.\n\nThis is what stops a job the user cancelled two minutes ago from quietly overwriting the answer they are currently reading."
+      "description": "A developer must make eligibility validation and publication one conditional commit, ordered with cancellation, attempt replacement and relevant policy changes. Preliminary reads can become stale; if eligibility is lost, publish no current output or completed status.\n\nFor example, pause after the preliminary reads, persist cancellation, then release the worker. The consuming runtime must reject that late completion and preserve cancellation and history. This pack states the contract; it does not implement the runtime."
     },
     {
       "file": "artifact.md",

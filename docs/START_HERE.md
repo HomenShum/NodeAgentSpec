@@ -181,9 +181,10 @@ The harness owns truth. The model owns proposals.
 **Output** — committed state transitions, scheduled workers, trace events.
 **Failure behavior** — a cancelled worker that finishes late and commits anyway,
 overwriting current work with a stale answer. `harness.md`'s `## Commit Guard`
-is the six-check sequence that prevents it: re-read the worker, confirm it is
-still running, confirm the attempt still matches, confirm nothing was cancelled,
-confirm policy still allows the write, then commit atomically.
+requires eligibility validation and publication to form one conditional commit,
+ordered with cancellation, attempt replacement, and relevant policy changes.
+Reading those conditions earlier is insufficient: if eligibility is lost before
+that decision, publish no current output or completed status and preserve history.
 **Next** — the harness needs capabilities to schedule: Step 5.
 
 ---
@@ -312,7 +313,7 @@ each links here instead.
 ```md
 ## Stale Commit
 Symptom: old worker commits after user retargeted, canceled, or retried
-Fix: revalidate worker status before commit; use run tokens or attempt ids
+Fix: condition publication/completion on current eligibility at one commit boundary
 ```
 
 **Input** — a system misbehaving, or a human interrupting.

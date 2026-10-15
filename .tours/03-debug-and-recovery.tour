@@ -29,7 +29,7 @@
       "line": 39,
       "pattern": "## Stale Commit",
       "title": "Stale commit - the one that is hardest to reproduce",
-      "description": "A worker the user cancelled or retargeted finishes late and commits anyway, overwriting current work with an answer to a question nobody is asking any more.\n\nIt is hard to catch because it only appears under real timing. The fix is the Commit Guard in harness.md - revalidate before committing, and use run tokens or attempt ids."
+      "description": "A worker the user cancelled or retargeted finishes late and commits anyway, overwriting current work with an answer to a question nobody is asking any more.\n\nExercise this race by pausing after preliminary eligibility reads, persisting cancellation, then releasing completion. The Commit Guard in harness.md requires current eligibility and publication in one conditional decision ordered with cancellation, attempt replacement and relevant policy changes. Earlier reads or matching attempt ids alone are insufficient."
     },
     {
       "file": "interrupts.md",
@@ -68,7 +68,7 @@
     },
     {
       "file": "evals.md",
-      "line": 72,
+      "line": 84,
       "pattern": "### Count To N",
       "title": "The test that catches most of it",
       "description": "'Count To N' looks trivial and is not. Counting to N with rotating turns catches off-by-one errors, stale done, overlapping turns and missing shared state in one exercise, because every one of those bugs shows up as a visibly wrong number.\n\nThe other two canonical tests are Interrupt Retarget and Parallel Goal."
