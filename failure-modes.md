@@ -44,8 +44,8 @@ Symptom:
 
 Fix:
 
-- revalidate worker status before commit
-- use run tokens or attempt ids
+- condition publication and completion on current eligibility at the same commit boundary
+- order that decision with cancellation, attempt replacement, and relevant policy changes
 
 ## Approval Hijack
 

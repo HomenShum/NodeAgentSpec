@@ -362,3 +362,20 @@ This is a documentation-maintenance result, not a promotion iteration.
   rendered presentation, responsiveness, SEO or product readiness.
 - **Conditions newly PASS:** none. The existing promotion scorecard and
   unresolved adoption-verification gap are unchanged.
+
+### Conditional completion contract clarification — 2026-10-15
+
+- **Request and reader:** a developer implementing cancellation must not let a late
+  worker replace the current result after its authority was removed.
+- **Before:** the Commit Guard checked eligibility before separately committing output
+  and completion. A cancellation between those steps defeats that recipe even when
+  the output/status writes are atomic. The full spec already forbade this result;
+  this is a recipe clarification, not an observed consumer-runtime defect.
+- **After:** eligibility and authoritative publication/completion are one conditional
+  decision ordered with cancellation, attempt replacement and relevant policy changes.
+  Copied guidance agrees; consumer evals include that interleaving, valid completion,
+  no-artifact completion, overlapping attempts and sustained cancellation/retry.
+- **Proof boundary:** compare those logical schedules against the before/after prose
+  and run the existing citation checker. Consumers must still execute the race in
+  their own runtime and inspect state, artifacts and traces. No runtime, dependency,
+  storage mechanism or promotion condition is added; existing evidence stays intact.

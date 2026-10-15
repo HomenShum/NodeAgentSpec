@@ -65,8 +65,8 @@ It should:
 - check policy before tools
 - mark running
 - execute work
-- write artifact
-- mark terminal status
+- prepare output without publishing it
+- publish successful completion through the Commit Guard
 - avoid committing if canceled or stale
 
 ### Policy Gate
@@ -104,14 +104,18 @@ shortened copy of the type cannot satisfy.
 
 ## Commit Guard
 
-Before a worker writes an artifact or marks completion:
+Before a worker publishes an artifact or marks successful completion:
 
 1. Re-read the worker.
 2. Confirm status is still `running`.
 3. Confirm run token or attempt still matches.
 4. Confirm goal and task are not canceled.
 5. Confirm policy still allows the write.
-6. Commit artifact and terminal status atomically where possible.
+6. Publish the artifact (if any) and completed status only if checks 1–5 still hold in the same conditional commit.
+
+Order this decision with worker/goal/task cancellation, attempt replacement, and relevant policy changes. A separate preliminary read is insufficient: eligibility validation and authoritative publication must form one indivisible decision. If eligibility is lost, reject completion without making its output current or overwriting canceled or superseding state.
+
+Prepared output may remain private, and rejection traces must remain visible. This does not undo tool side effects already performed. A completion committed before a later cancellation request is not stale; preserve that history.
 
 ## Stale Write Rule
 
